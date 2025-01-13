@@ -21,3 +21,7 @@ fun StockInfo.getDisplayLtrAndName(): String {
         else ->"$ltr | $name"
     }
 }
+
+fun StockInfo.getDisplayLtpAndCng(): String{
+    return "$ltp (${chg})"
+}

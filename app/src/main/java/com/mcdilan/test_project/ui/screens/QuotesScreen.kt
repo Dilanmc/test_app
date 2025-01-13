@@ -46,6 +46,7 @@ import com.mcdilan.test_project.QuotesViewModel
 import com.mcdilan.test_project.R
 import com.mcdilan.test_project.ext.getColorForPCP
 import com.mcdilan.test_project.model.StockInfo
+import com.mcdilan.test_project.model.getDisplayLtpAndCng
 import com.mcdilan.test_project.model.getDisplayLtrAndName
 
 @Preview(
@@ -122,7 +123,7 @@ fun Ticker(item: StockInfo) {
             )
         }
         val previousValue = previousValues[item.c] ?: item.pcp
-        previousValues[item.c!!] = item.pcp
+        item.c?.let { previousValues[it] = item.pcp }
         HighlightedText(
             value = item.pcp,
             previousValue = previousValue
@@ -144,7 +145,7 @@ fun QuoteData(item: StockInfo) {
             color = colorResource(R.color.grey)
         )
         Text(
-            text = "${item.ltp} (${(item.chg)})",
+            text = item.getDisplayLtpAndCng(),
             fontSize = 14.sp,
             fontWeight = FontWeight.Normal,
             color = colorResource(R.color.black)
